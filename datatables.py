@@ -2,7 +2,7 @@
 
 Supports DataTables v1.10+ (no legacy support).
 
-GNU General Public License, version 2
+Apache License, Version 2.0
 """
 import datetime
 import re
@@ -27,7 +27,7 @@ class DataTablesQuerySetMixin(object):
         - matching UI column names to model fields including nested ones according to the mapping passed;
         - pagination support;
         - transforming datetimes into strings to be JSON-serializable;
-        - when pagination is fully disabled, passing "page_size" argument in URL will limit the number of rows returned;
+        - when pagination is fully disabled, passing "limit" argument in URL will limit the number of rows returned;
         - DataTables acceptable response, ready for JSON dump;
         - no regex support.
     """
@@ -95,7 +95,7 @@ class DataTablesQuerySetMixin(object):
             search[regex]	            false
             search[value]
             start	                    0
-            page_size                   10  # Custom, optional
+            limit                       10  # Custom, optional
         """
         # All columns search and individual column filtering
         or_condition = Q()
@@ -187,8 +187,8 @@ class DataTablesQuerySetMixin(object):
         try:
             limit = int(params.get('length'))
             offset = int(params.get('start'))
-            if limit == -1 and params.get('page_size'):
-                limit = int(params.get('page_size'))
+            if limit == -1 and params.get('limit'):
+                limit = int(params.get('limit'))
         except ValueError:
             pass
 
@@ -208,9 +208,9 @@ class DataTablesQuerySetMixin(object):
                 else:
                     val = nested_getattr(item, field)
 
-                # Transform datetime to str to be JSON-serializable
+                # Transform datetime into string to be JSON-serializable
                 if isinstance(val, datetime.datetime):
-                    val = str(val)
+                    val = val.strftime('%Y-%m-%d %H:%M:%S')
 
                 row[attr] = val
             rows.append(row)

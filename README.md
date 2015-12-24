@@ -4,7 +4,7 @@ Server-side library to generate JSON data for JQuery DataTables from Django quer
 Comes as Queryset mixin class to extend a single model queryset.
 Supports DataTables v1.10+ (no legacy support).
 
-License: GNU General Public License, version 2
+License: Apache License, Version 2.0
 
 ## Features
 
@@ -20,7 +20,7 @@ License: GNU General Public License, version 2
 * matching UI column names to model fields including nested ones according to the mapping passed;
 * pagination support;
 * transforming datetimes into strings to be JSON-serializable;
-* when pagination is fully disabled, passing "page_size" argument in URL will limit the number of rows returned;
+* when pagination is fully disabled, passing "limit" argument in URL will limit the number of rows returned;
 * DataTables acceptable response, ready for JSON dump;
 * no regex support.
 
