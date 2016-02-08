@@ -1,10 +1,8 @@
 # Django DataTablesQuerySetMixin
 
-Server-side library to generate JSON data for JQuery DataTables from Django queryset.
+Server-side library to generate JSON data for JQuery DataTables from Django queryset result.
 Comes as Queryset mixin class to extend a single model queryset.
 Supports DataTables v1.10+ (no legacy support).
-
-License: Apache License, Version 2.0
 
 ## Features
 
